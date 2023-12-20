@@ -1,29 +1,11 @@
-import mongoose, { Schema, Document } from "mongoose";
-import {
-  member_status_enums,
+const mongoose = require("mongoose");
+const {
   member_type_enums,
+  member_status_enums,
   ordinary_enums,
-} from "../lib/config";
+} = require("../lib/config");
 
-interface Member extends Document {
-  mb_nick: string;
-  mb_phone: string;
-  mb_password: string;
-  mb_type: string;
-  mb_status: string;
-  mb_full_name?: string;
-  mb_address?: string;
-  mb_description?: string;
-  mb_image?: string;
-  mb_point: number;
-  mb_top: string;
-  mb_views: number;
-  mb_likes: number;
-  mb_follow_cnt: number;
-  mb_subscriber_cnt: number;
-}
-
-const memberSchema: Schema<Member> = new mongoose.Schema(
+const memberSchema = new mongoose.Schema(
   {
     mb_nick: {
       type: String,
@@ -56,10 +38,6 @@ const memberSchema: Schema<Member> = new mongoose.Schema(
         values: member_status_enums,
         message: "{VALUE} is not among permitted values",
       },
-    },
-    mb_full_name: {
-      type: String,
-      required: false,
     },
     mb_address: {
       type: String,
@@ -111,4 +89,4 @@ const memberSchema: Schema<Member> = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<Member>("Member", memberSchema);
+module.exports = mongoose.model("Member", memberSchema);

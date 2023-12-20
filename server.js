@@ -1,9 +1,8 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
+const http = require("http");
+const mongoose = require("mongoose");
+
 dotenv.config();
-
-import http from "http";
-import mongoose, { ConnectOptions } from "mongoose";
-
 const connectionString = process.env.MONGO_URL;
 
 mongoose.set("strictQuery", false);
@@ -12,8 +11,8 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  } as ConnectOptions,
-  (err: Error) => {
+  },
+  (err) => {
     if (err) {
       console.log("Error on connecting to mongoose");
     } else {
@@ -22,7 +21,7 @@ mongoose.connect(
 
       const app = require("./app");
       const server = http.createServer(app);
-      const port = process.env.PORT || 3000;
+      const port = process.env.PORT || 3003;
       server.listen(port, () => {
         console.log(
           `Server is running on port ${port}, http://localhost:${port}`
