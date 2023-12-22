@@ -1,0 +1,44 @@
+<%- include('includes/header') %>
+<link rel="stylesheet" href="/css/home.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glassmorphism button</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="btn">
+      <% if(!member){%>
+      <a class="nav-link active" aria-current="page" href="/resto">Home</a>
+    </div>
+    <div class="btn">
+      <a class="nav-link" aria-current="page" href="/resto/sign-up">Signup</a>
+    </div>
+    <div class="btn">
+      <a class="nav-link" aria-current="page" href="/resto/login">Login</a>
+      <%} else if (member.mb_type ==="ADMIN") {%>
+      <div class="btn">
+        <a class="nav-link" aria-current="page" href="/resto/all-restaurants"
+          >All Restaurants</a
+        >
+      </div>
+      <div class="btn" onclick="return confirm('Do you want logout?')">
+        <a class="nav-link" href="/resto/logout">Logout</a>
+      </div>
+      <%} else {%>
+      <div class="btn">
+        <a class="nav-link" aria-current="page" href="/resto/products/menu"
+          >MyResto</a
+        >
+      </div>
+      <div class="btn" onclick="return confirm('Do you want logout?')">
+        <a class="nav-link" href="/resto/logout">Logout</a>
+      </div>
+      <%}%>
+    </div>
+  </div>
+</body>
+<body></body>
+<%- include('includes/footer') %>
