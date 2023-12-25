@@ -1,8 +1,8 @@
 const path = require("path");
 const multer = require("multer");
-const { uuidv4 } = require("uuid");
+const uuid = require("uuid");
 
-/* Multer image uploader */
+/* Multer image uploader*/
 function getTargetImageStorage(address) {
   return multer.diskStorage({
     destination: function (req, file, cb) {
@@ -11,12 +11,11 @@ function getTargetImageStorage(address) {
     filename: function (req, file, cb) {
       console.log(file);
       const extension = path.parse(file.originalname).ext;
-      const random_name = uuidv4() + extension;
+      const random_name = uuid.v4() + extension;
       cb(null, random_name);
     },
   });
 }
-
 const makeUploader = (address) => {
   const storage = getTargetImageStorage(address);
   return multer({ storage: storage });
