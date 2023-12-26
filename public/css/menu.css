@@ -1,4 +1,4 @@
-.restaurant_menu-frame {
+.seller_menu_frame {
   position: relative;
   padding-bottom: 80px;
   width: 100%;
@@ -9,7 +9,7 @@
   background: #2c261e;
 }
 
-.restaurant_menu_frame .restaurant_container {
+.seller_menu_frame .seller_container {
   position: relative;
   margin-top: 100px;
   width: 1320px;
@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-.restaurant_container .dishs_table {
+.seller_container .furniture_table {
   position: relative;
   width: 100%;
   height: auto;
@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-.restaurant_container .resto_table {
+.seller_container .resto_table {
   position: relative;
   width: 85%;
   height: auto;
@@ -99,7 +99,6 @@
   background: #fff;
   border: 1px solid #dddddd;
   border-radius: 8px;
-  font-family: "GT Walsheim Pro";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -107,9 +106,8 @@
   color: #4f547b;
 }
 
-.restaurant_container .dish_container {
+.furniture_container {
   position: relative;
-  margin-top: 20px;
   width: 100%;
   height: auto;
   display: none;
@@ -126,18 +124,8 @@
   flex-direction: column;
 }
 
-.new_dish_txt {
-  font-family: "Sourrce Serif Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-style: 30px;
-  line-height: 25px;
-  color: #fff;
-}
-
 .long_input label {
   width: 100%;
-  font-family: "Sourrce Serif Pro";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -146,7 +134,6 @@
 }
 
 .long_input input {
-  font-family: "GT Walsheim Pro";
   font-style: normal;
   font-weight: 400;
   font-style: 15px;
@@ -163,7 +150,7 @@
   height: 54px;
 }
 
-.dish_container .half_input_frame {
+.furniture_container .half_input_frame {
   position: relative;
   margin-top: 25px;
   width: 100%;
@@ -182,7 +169,6 @@
 }
 
 .half_input label {
-  font-family: "Sourrce Serif Pro";
   font-style: normal;
   font-size: 16px;
   font-weight: 400;
@@ -203,7 +189,6 @@
 }
 
 .half_input select {
-  font-family: "GT Walsheim Pro";
   font-style: normal;
   font-weight: 400;
   font-style: 15px;
@@ -222,7 +207,6 @@
 }
 
 .long_input textarea {
-  font-family: "GT Walsheim Pro";
   font-style: normal;
   font-weight: 400;
   font-style: 15px;
@@ -248,12 +232,13 @@
 
 .img_frame label {
   margin-top: 30px;
-  font-family: "Sourrce Serif Pro";
   font-style: normal;
   font-size: 16px;
   font-weight: 400;
   line-height: 25px;
   color: #fff;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .media-frame {
@@ -263,7 +248,7 @@
   height: 250px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .media-frame .upload_img_box {
