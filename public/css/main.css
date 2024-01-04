@@ -13,6 +13,7 @@ body {
 #main_container {
   position: relative;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +26,7 @@ a {
 
 .nav-item a {
   color: #e3c08d;
+  font-size: 24px;
 }
 
 .nav-item a .disabled {
@@ -34,18 +36,24 @@ a {
 .group_name {
   position: absolute;
   z-index: 33333;
-  font-family: monospace;
   font-size: xx-large;
   top: 1%;
   color: #efefef;
+  margin-top: 20px;
 }
 
-.new_dish_txt {
-  font-family: "Source Serif Pro";
+.new_furniture_txt {
   font-size: 30px;
   font-weight: 400;
   font-style: normal;
   line-height: 25px;
   color: #fff;
   margin-bottom: 30px;
+  caption-side: top;
+  text-align: center;
+}
+
+.resto-table td,
+th {
+  text-align: center;
 }

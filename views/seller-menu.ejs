@@ -36,10 +36,10 @@
               <td><%=value.product_name%></td>
               <td><%=value.product_collection%></td>
               <td>
-                <%=value.product_collection==='gifts'||"accessories"? value.product_color :
+                <%=value.product_collection==="gifts" | "accessories"? value.product_color :
                 value.product_size%>
               </td>
-              <td><%=value.product_price %>$</td>
+              <td><%=value.product_price %> $</td>
               <td><%=value.product_left_cnt %></td>
               <td>
                 <select class="spec_select new_product_status"  id="<%= value._id %>">
@@ -287,8 +287,7 @@
         !product_collection ||
         !product_description ||
         !product_left_cnt ||
-        !product_price ||
-        !product_status
+        !product_price 
       ) {
         alert("Please fill out all required fields!");
         return false;

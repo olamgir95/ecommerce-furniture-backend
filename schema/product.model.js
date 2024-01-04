@@ -3,7 +3,7 @@ const {
   product_size_enums,
   product_status_enums,
   product_collection_enums,
-  product_volume_enums,
+  product_color_enums,
 } = require("../lib/config");
 
 const productSchema = new mongoose.Schema(
@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema(
     product_status: {
       type: String,
       required: true,
-      default: "PAUSED",
+      default: "PROCESS",
       enum: {
         values: product_status_enums,
         message: "{VALUE} is not among permitted enum values",
@@ -46,7 +46,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "normal",
       required: function () {
-        const sized_list = ["dish", "salad", "dessert"];
+        const sized_list = ["furniture", "wooden", "household"];
         return sized_list.includes(this.product_collection);
       },
       enum: {
@@ -54,14 +54,14 @@ const productSchema = new mongoose.Schema(
         message: "{VALUE} is not among permitted enum values",
       },
     },
-    product_volume: {
-      type: Number,
-      default: 1,
+    product_color: {
+      type: String,
+      default: "white",
       required: function () {
-        return this.product_collection === "drink";
+        return this.product_collection === "gifts" || "accessories";
       },
       enum: {
-        values: product_volume_enums,
+        values: product_color_enums,
         message: "{VALUE} is not among permitted enum values",
       },
     },
@@ -74,7 +74,7 @@ const productSchema = new mongoose.Schema(
       required: false,
       default: [],
     },
-    restaurant_mb_id: {
+    seller_mb_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Member",
       required: false,
@@ -89,10 +89,11 @@ const productSchema = new mongoose.Schema(
       required: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { versionKey: false }
 );
 productSchema.index(
-  { restaurant_mb_id: 1, product_name: 1, product_size: 1, product_volume: 1 },
+  { seller_mb_id: 1, product_name: 1, product_size: 1, product_color: 1 },
   { unique: true }
 );
 

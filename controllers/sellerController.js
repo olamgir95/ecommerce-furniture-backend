@@ -3,6 +3,7 @@ const Member = require("../models/Member");
 const Product = require("../models/Product");
 const Seller = require("../models/Seller");
 const Definer = require("../lib/mistake");
+const Article = require("../models/Article");
 
 const sellerController = {
   home: async (req, res) => {
@@ -41,18 +42,20 @@ const sellerController = {
   signupProcess: async (req, res) => {
     try {
       console.log(`POST: cont/signupProcess`);
-
+      console.log("req", req.file);
+      console.log("boidy", req.body);
       assert(req.file, Definer.general_err3);
 
       let new_member = req.body;
       new_member.mb_type = "SELLER";
-      new_member.mb_image = req.file.path;
-
+      new_member.mb_image = req.file.path.replace(/\\/g, "/");
+      console.log("newmember", new_member);
       const member = new Member(),
         result = await member.signupData(new_member);
       assert(result, Definer.general_err1);
 
       req.session.member = new_member;
+      console.log("res", result);
       req.session.save(function () {
         res.redirect("/resto/products/menu");
       });
@@ -83,10 +86,11 @@ const sellerController = {
         result = await member.loginData(data);
 
       req.session.member = result;
+      console.log("res", result);
       req.session.save(function () {
-        result.mb_type === "ADMIN"
-          ? res.redirect("/resto/all-Seller")
-          : res.redirect("/resto/products/menu");
+        result.mb_type === "SELLER"
+          ? res.redirect("/resto/products/menu")
+          : res.redirect("/resto/all-sellers");
       });
     } catch (err) {
       console.log(`ERROR, cont/login, ${err.message}`);
@@ -107,13 +111,13 @@ const sellerController = {
   },
 
   validateAuthSeller: (req, res, next) => {
-    if (req.session?.member?.mb_type === "Seller") {
+    if (req.session?.member?.mb_type === "SELLER") {
       req.member = req.session.member;
       next();
     } else
       res.json({
         state: "fail",
-        message: "only authenticated members with Seller type",
+        message: "only authenticated members with SELLER type",
       });
   },
 
@@ -142,7 +146,12 @@ const sellerController = {
       console.log("GET cont/getAllSellers");
       const seller = new Seller();
       const seller_data = await seller.getAllSellersData();
-      res.render("all-Sellers", { seller_data: seller_data });
+      const article = new Article();
+      const article_data = await article.getAllArticlesData();
+      res.render("all-sellers", {
+        seller_data: seller_data,
+        article_data: article_data,
+      });
     } catch (err) {
       console.log(`ERROR, cont/getAllSellers, ${err.message}`);
       res.json({ state: "fail", message: err.message });

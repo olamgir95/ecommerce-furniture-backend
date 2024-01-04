@@ -2,6 +2,7 @@ const express = require("express");
 const productController = require("./controllers/productController");
 const sellerController = require("./controllers/sellerController");
 const upload = require("./utils/upload-multer");
+const communityController = require("./controllers/CommunityController");
 
 /*************************/
 /*  BSSR EJS */
@@ -12,7 +13,7 @@ router_admin.get("/", sellerController.home);
 router_admin
   .route("/sign-up")
   .get(sellerController.getSignupMySeller)
-  .post(upload("members").single("seller_img"), sellerController.signupProcess);
+  .post(upload("members").single("brand_img"), sellerController.signupProcess);
 
 router_admin
   .route("/login")
@@ -36,15 +37,27 @@ router_admin.post(
 );
 
 router_admin.get(
-  "/all-seller",
+  "/all-sellers",
   sellerController.validateAdmin,
   sellerController.getAllSellers
 );
 
 router_admin.post(
-  "/all-seller/edit",
+  "/all-sellers/edit",
   sellerController.validateAdmin,
   sellerController.updateSellerByAdmin
+);
+
+router_admin.get(
+  "/all-articles",
+  sellerController.validateAdmin,
+  communityController.getAllArticles
+);
+
+router_admin.post(
+  "/all-articles/edit",
+  sellerController.validateAdmin,
+  communityController.updateArticleStatusByAdmin
 );
 
 module.exports = router_admin;

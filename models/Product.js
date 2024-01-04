@@ -13,7 +13,6 @@ class Product {
       data.seller_mb_id = shapeIntoMongooseObjectId(member._id);
 
       const new_product = new this.productModel(data);
-      console.log("new", new_product);
       const result = await new_product.save();
 
       assert.ok(result, Definer.product_err1);
