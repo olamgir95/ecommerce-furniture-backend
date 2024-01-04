@@ -43,6 +43,32 @@ class Member {
       throw err;
     }
   }
+
+  async getChosenMemberData(member, id) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+      id = shapeIntoMongooseObjectId(id);
+
+      let aggregateQuery = [
+        { $match: { _id: id, mb_status: "ACTIVE" } },
+        { $unset: "mb_password" },
+      ];
+
+      if (member) {
+        await this.viewChosenItemByMember(member, id, "member");
+        aggregateQuery.push(lookup_auth_member_liked(auth_mb_id));
+        aggregateQuery.push(
+          lookup_auth_member_following(auth_mb_id, "members")
+        );
+      }
+
+      const result = await this.memberModel.aggregate(aggregateQuery).exec();
+      assert.ok(result, Definer.general_err2);
+      return result[0];
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = Member;
