@@ -3,6 +3,20 @@ const Product = require("../models/Product");
 const Definer = require("../lib/mistake");
 
 const productController = {
+  getAllProducts: async (req, res) => {
+    try {
+      console.log(`GET: cont/getAllProducts `);
+      const product = new Product();
+      const result = await product.getAllProductsData(req.member, req.body);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getAllProducts,    ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+
+  //BSSR
   addNewProduct: async (req, res) => {
     try {
       console.log("POST: cont/addNewProduct");

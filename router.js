@@ -17,3 +17,11 @@ router.get(
   memberController.retrieveAuthMember,
   memberController.getChosenMember
 );
+
+//Product related routers
+
+router.post(
+  "/products",
+  memberController.retrieveAuthMember,
+  productController.getAllProducts
+);
