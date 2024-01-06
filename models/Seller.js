@@ -37,7 +37,7 @@ class Seller {
 
       aggregationQuery.push(lookup_auth_member_liked(auth_mb_id));
 
-      const result = await this.memberModel.aggregate(aggregationQuery).exec();
+      const result = await memberModel.aggregate(aggregationQuery).exec();
       assert.ok(result, Definer.general_err1);
       return result;
     } catch (err) {
@@ -52,7 +52,7 @@ class Seller {
           mb_type: "SELLER",
         })
         .exec();
-      //   assert(result, Definer.general_err1);
+      assert(result, Definer.general_err1);
 
       return result;
     } catch (err) {
@@ -70,7 +70,7 @@ class Seller {
         })
         .exec();
 
-      //   assert.ok(result, Definer.general_err1);
+      assert.ok(result, Definer.general_err1);
       return result;
     } catch (err) {
       throw err;

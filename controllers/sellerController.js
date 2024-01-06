@@ -57,20 +57,16 @@ const sellerController = {
   signupProcess: async (req, res) => {
     try {
       console.log(`POST: cont/signupProcess`);
-      console.log("req", req.file);
-      console.log("boidy", req.body);
       assert(req.file, Definer.general_err3);
 
       let new_member = req.body;
       new_member.mb_type = "SELLER";
       new_member.mb_image = req.file.path.replace(/\\/g, "/");
-      console.log("newmember", new_member);
       const member = new Member(),
         result = await member.signupData(new_member);
       assert(result, Definer.general_err1);
 
-      req.session.member = new_member;
-      console.log("res", result);
+      req.session.member = result;
       req.session.save(function () {
         res.redirect("/resto/products/menu");
       });

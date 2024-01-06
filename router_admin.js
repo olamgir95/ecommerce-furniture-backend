@@ -27,7 +27,7 @@ router_admin.get("/products/menu", sellerController.getMySellerProducts);
 router_admin.post(
   "/products/create",
   sellerController.validateAuthSeller,
-  upload("products").array("product_images", 5),
+  upload("products").array("product_images", 3),
   productController.addNewProduct
 );
 router_admin.post(

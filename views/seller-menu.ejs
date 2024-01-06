@@ -36,15 +36,15 @@
               <td><%=value.product_name%></td>
               <td><%=value.product_collection%></td>
               <td>
-                <%=value.product_collection==="gifts" | "accessories"? value.product_color :
+                <%=value.product_collection==="gifts" || value.product_collection ==="accessories" ? value.product_color :
                 value.product_size%>
               </td>
               <td><%=value.product_price %> $</td>
               <td><%=value.product_left_cnt %></td>
               <td>
-                <select class="spec_select new_product_status"  id="<%= value._id %>">
+                <select class="spec_select new_product_status"  id="<%= value._id %>" >
+                  <option  value="PROCESS" <%= value.product_status ==='PROCESS' ? 'selected': '' %> > PROCESS</option>
                   <option value="PAUSED" <%= value.product_status ==='PAUSED' ? 'selected': '' %> > PAUSED</option>
-                  <option value="PROCESS" <%= value.product_status ==='PROCESS' ? 'selected': '' %> > PROCESS</option>
                 </select>
               </td>
             </tbody>
@@ -117,7 +117,7 @@
             <div class="half_input" id="product_size">
               <label for="">Product size</label>
               <select name="product_size" class="product_size">
-                <option value="normal" selected>normal</option>
+                <option value="normal">normal</option>
                 <option value="twin">twin</option>
                 <option value="twinXL">twinXL</option>
                 <option value="full">full</option>
@@ -125,9 +125,9 @@
             </div>
 
             <div class="half_input" id="product_color" style="display: none">
-              <label for="">Gifts color </label>
-              <select name="product_color" class="product_color">
-                <option value="white" selected>white</option>
+              <label for="">Product color </label>
+              <select name="product_color" class="product_color" >
+                <option selected value="white">white</option>
                 <option value="red">red</option>
                 <option value="green">green</option>
                 <option value="black">black</option>
@@ -136,19 +136,7 @@
               </select>
             </div>
 
-            <div
-              class="half_input"
-              id="accessories_color"
-              style="display: none"
-            >
-              <label for="">Accessories color </label>
-              <select name="accessories_color" class="product_color">
-                <option value="white">white</option>
-                <option value="black" selected>black</option>
-                <option value="grey">grey</option>
-                <option value="mixed">mixed</option>
-              </select>
-            </div>
+       
           </div>
           <div class="long_input">
             <label for="Product haqida"></label>
@@ -230,18 +218,12 @@
     $(function () {
       $(".product_collection").on("change", function () {
         const selectedValue = $(this).val();
-        if (selectedValue === "gifts") {
+        if (selectedValue === "gifts" || selectedValue === "accessories") {
           $("#product_color").show();
           $("#product_size").hide();
-          $("#accessories_color").hide();
-        } else if (selectedValue === "accessories") {
-          $("#accessories_color").show();
-          $("#product_color").hide();
-          $("#product_size").hide();
-        } else {
+        }  else {
           $("#product_color").hide();
           $("#product_size").show();
-          $("#accessories_color").hide();
         }
       });
 
@@ -282,15 +264,17 @@
         product_description = $(".product_description").val(),
         product_left_cnt = $(".product_left_cnt").val(),
         product_collection = $(".product_collection").val(),
-        product_status = $(".product_status").val();
+        product_status = $(".new_product_status").val();
       if (
-        !seller_mb_id ||
-        !product_name ||
-        !product_collection ||
-        !product_description ||
-        !product_left_cnt ||
-        !product_price 
+        seller_mb_id==="" ||
+        product_name==="" ||
+        product_collection==="" ||
+        product_description==="" ||
+        product_left_cnt==="" ||
+        product_price ===""||
+        product_status===""
       ) {
+     
         alert("Please fill out all required fields!");
         return false;
       } else return true;

@@ -56,9 +56,12 @@ const productSchema = new mongoose.Schema(
     },
     product_color: {
       type: String,
-      default: "white",
+      default: "white" || "black",
       required: function () {
-        return this.product_collection === "gifts" || "accessories";
+        return (
+          this.product_collection === "gifts" ||
+          this.product_collection === "accessories"
+        );
       },
       enum: {
         values: product_color_enums,
