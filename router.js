@@ -31,3 +31,11 @@ router.get(
   memberController.retrieveAuthMember,
   productController.getChosenProduct
 );
+
+//Seller related routers
+
+router.get(
+  "/sellers",
+  memberController.retrieveAuthMember,
+  sellerController.getSellers
+);

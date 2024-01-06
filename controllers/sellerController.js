@@ -6,6 +6,21 @@ const Definer = require("../lib/mistake");
 const Article = require("../models/Article");
 
 const sellerController = {
+  getSellers: async (req, res) => {
+    try {
+      console.log(`GET: cont/getSellers `);
+      const data = req.query,
+        seller = new Seller(),
+        result = await seller.getSellerData(req.member, data);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getSellers,    ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+
+  //BSSR
   home: async (req, res) => {
     try {
       console.log(`GET: cont/home`);
