@@ -25,3 +25,9 @@ router.post(
   memberController.retrieveAuthMember,
   productController.getAllProducts
 );
+
+router.get(
+  "/products/:id",
+  memberController.retrieveAuthMember,
+  productController.getChosenProduct
+);
