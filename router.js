@@ -39,3 +39,9 @@ router.get(
   memberController.retrieveAuthMember,
   sellerController.getSellers
 );
+
+router.get(
+  "/sellers/:id",
+  memberController.retrieveAuthMember,
+  sellerController.getChosenSeller
+);

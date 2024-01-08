@@ -11,11 +11,25 @@ const sellerController = {
       console.log(`GET: cont/getSellers `);
       const data = req.query,
         seller = new Seller(),
-        result = await seller.getSellerData(req.member, data);
+        result = await seller.getSellersData(req.member, data);
 
       res.json({ state: "success", data: result });
     } catch (err) {
       console.log(`ERROR, cont/getSellers,    ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+
+  getChosenSeller: async (req, res) => {
+    try {
+      console.log(`GET: cont/getChosenSeller `);
+      const seller = new Seller(),
+        id = req.params.id,
+        result = await seller.getChosenSellerData(req.member, id);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getChosenSeller,    ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },

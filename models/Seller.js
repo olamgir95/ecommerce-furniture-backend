@@ -4,11 +4,12 @@ const {
   shapeIntoMongooseObjectId,
   lookup_auth_member_liked,
 } = require("../lib/config");
+const Member = require("./Member");
 
 class Seller {
   constructor() {}
 
-  async getSellerData(member, data) {
+  async getSellersData(member, data) {
     try {
       const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
       let match = { mb_type: "SELLER", mb_status: "ACTIVE" };
@@ -45,6 +46,34 @@ class Seller {
     }
   }
 
+  async getChosenSellerData(member, id) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+      id = shapeIntoMongooseObjectId(id);
+
+      if (member) {
+        const member_obj = new Member();
+        await member_obj.viewChosenItemByMember(member, id, "member");
+      }
+
+      const result = await this.memberModel
+        .aggregate([
+          { $match: { _id: id, mb_status: "ACTIVE" } },
+          lookup_auth_member_liked(auth_mb_id),
+        ])
+        .exec();
+
+      assert.ok(result, Definer.general_err1);
+      return result[0];
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /**********************************
+   *  BSSR RELATED METHODS          *
+   **********************************/
+
   async getAllSellersData() {
     try {
       const result = await memberModel
@@ -59,6 +88,7 @@ class Seller {
       throw err;
     }
   }
+
   async updateSellerByAdminData(update_data) {
     try {
       const id = shapeIntoMongooseObjectId(update_data?.id);
