@@ -185,12 +185,12 @@ const sellerController = {
 
   updateSellerByAdmin: async (req, res) => {
     try {
-      console.log("GET cont/getAllSellers");
+      console.log("GET cont/updateSellerByAdmin");
       const seller = new Seller();
       const result = await seller.updateSellerByAdminData(req.body);
       await res.json({ state: "success", data: result });
     } catch (err) {
-      console.log(`ERROR, cont/getAllSellers, ${err.message}`);
+      console.log(`ERROR, cont/updateSellerByAdmin, ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },

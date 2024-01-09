@@ -1,8 +1,12 @@
+body {
+  background: #4e7ac1;
+}
+
 .seller_menu_frame {
   position: relative;
   padding-bottom: 80px;
   width: 100%;
-  height: fit-content;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

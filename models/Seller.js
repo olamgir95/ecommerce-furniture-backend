@@ -5,6 +5,7 @@ const {
   lookup_auth_member_liked,
 } = require("../lib/config");
 const Member = require("./Member");
+const Definer = require("../lib/mistake");
 
 class Seller {
   constructor() {}
