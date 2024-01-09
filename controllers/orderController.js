@@ -18,5 +18,21 @@ const orderController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
+  getMyOrders: async (req, res) => {
+    try {
+      console.log(`GET: cont/getMyOrders`);
+      assert.ok(req.member, Definer.auth_err5);
+
+      const { member, query } = req;
+      const order = new Order();
+      const result = await order.getMyOrdersData(member, query);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getMyOrders, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
 };
 module.exports = orderController;
