@@ -5,6 +5,29 @@ const Definer = require("../lib/mistake");
 
 class Article {
   constructor() {}
+
+  async createArticleData(member, data) {
+    try {
+      data.mb_id = shapeIntoMongooseObjectId(member._id);
+
+      const new_article = await this.saveArticleData(data);
+      return new_article;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async saveArticleData(data) {
+    try {
+      const article = new articleModel(data);
+
+      return await article.save();
+    } catch (mongo_err) {
+      console.log(mongo_err);
+      throw new Error(Definer.mongo_validation_err1);
+    }
+  }
+
   async getAllArticlesData() {
     try {
       const result = await articleModel

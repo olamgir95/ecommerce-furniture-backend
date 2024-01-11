@@ -1,3 +1,4 @@
+const Definer = require("../lib/mistake");
 const Article = require("../models/Article");
 
 const communityController = {
@@ -11,6 +12,24 @@ const communityController = {
       res.json({ state: "success", data: image_url });
     } catch (err) {
       console.log(`ERROR, cont/imageInsertion, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+
+  createArticle: async (req, res) => {
+    try {
+      console.log(`GET: cont/createArticle`);
+      assert.ok(req.member, Definer.auth_err5);
+
+      const { member, body } = req;
+      const article = new Article();
+      const result = await article.createArticleData(member, body);
+
+      assert.ok(result, Definer.general_err1);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/createArticle, ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },
