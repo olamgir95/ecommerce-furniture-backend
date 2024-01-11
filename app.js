@@ -3,6 +3,7 @@ const app = express();
 const router_admin = require("./router_admin.js");
 const cookieParser = require("cookie-parser");
 let session = require("express-session");
+const router = require("./router.js");
 const MongoDBStore = require("connect-mongodb-session")(session);
 
 const store = new MongoDBStore({
@@ -39,6 +40,7 @@ app.set("views", "views");
 app.set("view engine", "ejs");
 
 // 4. Routing setup
+app.use("/", router);
 app.use("/resto", router_admin);
 
 module.exports = app;

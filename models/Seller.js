@@ -57,7 +57,7 @@ class Seller {
         await member_obj.viewChosenItemByMember(member, id, "member");
       }
 
-      const result = await this.memberModel
+      const result = await memberModel
         .aggregate([
           { $match: { _id: id, mb_status: "ACTIVE" } },
           lookup_auth_member_liked(auth_mb_id),
