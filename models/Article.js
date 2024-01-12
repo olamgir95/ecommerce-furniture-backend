@@ -1,5 +1,8 @@
 const assert = require("assert");
-const { shapeIntoMongooseObjectId } = require("../lib/config");
+const {
+  shapeIntoMongooseObjectId,
+  lookup_auth_member_liked,
+} = require("../lib/config");
 const articleModel = require("../schema/article.model");
 const Definer = require("../lib/mistake");
 
@@ -65,6 +68,42 @@ class Article {
         .exec();
 
       assert.ok(result, Definer.general_err1);
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getMemberArticlesData(member, mb_id, query) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+      mb_id = shapeIntoMongooseObjectId(mb_id);
+      const page = query.page ? Number(query.page) : 1;
+      const limit = query.limit ? Number(query.limit) : 5;
+
+      const result = await this.boArticleModel
+        .aggregate([
+          { $match: { mb_id: mb_id, art_status: "active" } },
+          {
+            $sort: { createdAt: -1 },
+          },
+          { $skip: (page - 1) * limit },
+          { $limit: limit },
+          {
+            $lookup: {
+              from: "members",
+              localField: "mb_id",
+              foreignField: "_id",
+              as: "member_data",
+            },
+          },
+          { $unwind: "$member_data" },
+          lookup_auth_member_liked(auth_mb_id),
+        ])
+        .exec();
+
+      assert.ok(result, Definer.article_err2);
+
       return result;
     } catch (err) {
       throw err;
