@@ -81,7 +81,7 @@ class Article {
       const page = query.page ? Number(query.page) : 1;
       const limit = query.limit ? Number(query.limit) : 5;
 
-      const result = await this.boArticleModel
+      const result = await articleModel
         .aggregate([
           { $match: { mb_id: mb_id, art_status: "active" } },
           {
@@ -103,6 +103,49 @@ class Article {
         .exec();
 
       assert.ok(result, Definer.article_err2);
+
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+  async getArticlesData(member, inquiry) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+      let matches =
+        inquiry.bo_id === "all"
+          ? { bo_id: { $in: board_id_enum_list }, art_status: "active" }
+          : { bo_id: inquiry.bo_id, art_status: "active" };
+
+      const limit = (inquiry.limit *= 1);
+      const page = (inquiry.page *= 1);
+
+      const sort = inquiry.order
+        ? { [`${inquiry.order}`]: -1 }
+        : { createdAt: -1 };
+
+      const result = await articleModel
+        .aggregate([
+          { $match: matches },
+          {
+            $sort: sort,
+          },
+          { $skip: (page - 1) * limit },
+          { $limit: limit },
+          {
+            $lookup: {
+              from: "members",
+              localField: "mb_id",
+              foreignField: "_id",
+              as: "member_data",
+            },
+          },
+          { $unwind: "$member_data" },
+          lookup_auth_member_liked(auth_mb_id),
+        ])
+        .exec();
+
+      assert.ok(result, Definer.article_err3);
 
       return result;
     } catch (err) {

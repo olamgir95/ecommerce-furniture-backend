@@ -34,10 +34,11 @@ const communityController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
   getMemberArticles: async (req, res) => {
     try {
       console.log(`GET: cont/getMemberArticles`);
-      // assert.ok(req.member, Definer.auth_err5);
+      assert.ok(req.member, Definer.auth_err5);
 
       const { member, query } = req;
       const article = new Article();
@@ -52,6 +53,24 @@ const communityController = {
       res.json({ state: "success", data: result });
     } catch (err) {
       console.log(`ERROR, cont/getMemberArticles, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+  getArticles: async (req, res) => {
+    try {
+      console.log(`GET: cont/getArticles`);
+      assert.ok(req.member, Definer.auth_err5);
+
+      const { member, query } = req;
+      const article = new Article();
+
+      const result = await article.getArticlesData(member, query);
+
+      assert.ok(result, Definer.general_err1);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/Articles, ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },
