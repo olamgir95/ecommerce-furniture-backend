@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { product_status_enums } = require("../lib/config");
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema(
@@ -9,21 +10,30 @@ const eventSchema = new Schema(
       required: false,
     },
 
-    location: {
+    event_location: {
       type: String,
       required: true,
     },
-    title: { type: String, required: true },
-    description: {
+    event_title: { type: String, required: true },
+    event_description: {
       type: String,
       required: true,
     },
-    author: {
+    event_status: {
+      type: String,
+      required: true,
+      default: "PROCESS",
+      enum: {
+        values: product_status_enums,
+        message: "{VALUE} is not among permitted enum values",
+      },
+    },
+    seller_mb_nick: {
       type: String,
       required: true,
     },
 
-    img: {
+    event_image: {
       type: String,
       required: true,
     },

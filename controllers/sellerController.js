@@ -4,6 +4,7 @@ const Product = require("../models/Product");
 const Seller = require("../models/Seller");
 const Definer = require("../lib/mistake");
 const Article = require("../models/Article");
+const Event = require("../models/Event");
 
 const sellerController = {
   getSellers: async (req, res) => {
@@ -45,6 +46,7 @@ const sellerController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
   getMySellerProducts: async (req, res) => {
     try {
       console.log(`GET: cont/getMySellerProducts`);
@@ -54,6 +56,19 @@ const sellerController = {
       console.log("data", data);
     } catch (err) {
       console.log(`ERROR, cont/getMySellerProducts, ${err.message}`);
+      res.redirect("/maltimart");
+    }
+  },
+
+  getMySellerEvents: async (req, res) => {
+    try {
+      console.log(`GET: cont/getMySellerEvents`);
+      const event = new Event();
+      const data = await event.getMySellerEventsData(req.session.member);
+      res.render("my-events", { my_events_data: data });
+      console.log("data", data);
+    } catch (err) {
+      console.log(`ERROR, cont/getMySellerEvents, ${err.message}`);
       res.redirect("/maltimart");
     }
   },
@@ -72,7 +87,6 @@ const sellerController = {
     try {
       console.log(`POST: cont/signupProcess`);
       assert(req.file, Definer.general_err3);
-
       let new_member = req.body;
       new_member.mb_type = "SELLER";
       new_member.mb_image = req.file.path.replace(/\\/g, "/");

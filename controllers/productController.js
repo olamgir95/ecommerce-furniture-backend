@@ -34,7 +34,6 @@ const productController = {
     try {
       console.log("POST: cont/addNewProduct");
       assert(req.files, Definer.general_err3);
-
       const product = new Product();
       const data = req.body;
       data.product_images = req.files.map((value) => {

@@ -298,3 +298,14 @@ body {
   height: 100%;
   cursor: pointer;
 }
+
+.event .media-frame {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+}
+.event .media-frame .thumbnail_desc {
+  color: white;
+  line-height: 40px;
+}

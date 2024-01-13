@@ -3,6 +3,7 @@ const productController = require("./controllers/productController");
 const sellerController = require("./controllers/sellerController");
 const upload = require("./utils/upload-multer");
 const communityController = require("./controllers/CommunityController");
+const eventController = require("./controllers/eventController");
 
 /*************************/
 /*  BSSR EJS */
@@ -58,6 +59,14 @@ router_admin.post(
   "/all-articles/edit",
   sellerController.validateAdmin,
   communityController.updateArticleStatusByAdmin
+);
+
+router_admin.get("/events/menu", sellerController.getMySellerEvents);
+router_admin.post(
+  "/events/create",
+  sellerController.validateAuthSeller,
+  upload("events").single("event_images"),
+  eventController.addNewEvent
 );
 
 module.exports = router_admin;
