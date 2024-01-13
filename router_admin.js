@@ -25,12 +25,14 @@ router_admin.get("/logout", sellerController.logout);
 router_admin.get("/check-me", sellerController.checkSessions);
 
 router_admin.get("/products/menu", sellerController.getMySellerProducts);
+
 router_admin.post(
   "/products/create",
   sellerController.validateAuthSeller,
   upload("products").array("product_images", 3),
   productController.addNewProduct
 );
+
 router_admin.post(
   "/products/edit/:id",
   sellerController.validateAuthSeller,
@@ -62,11 +64,18 @@ router_admin.post(
 );
 
 router_admin.get("/events/menu", sellerController.getMySellerEvents);
+
 router_admin.post(
   "/events/create",
   sellerController.validateAuthSeller,
   upload("events").single("event_images"),
   eventController.addNewEvent
+);
+
+router_admin.post(
+  "/events/edit/:id",
+  sellerController.validateAuthSeller,
+  eventController.updateChosenEvent
 );
 
 module.exports = router_admin;

@@ -22,5 +22,22 @@ const eventController = {
       console.log(`ERROR, cont/addNewEvent, ${err.message}`);
     }
   },
+
+  updateChosenEvent: async (req, res) => {
+    try {
+      console.log("POST: cont/updateChosenEvent");
+      const event = new Event();
+      const id = req.params.id;
+      const result = await event.updateChosenEventData(
+        id,
+        req.body,
+        req.member._id
+      );
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/updateChosenEvent, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
 };
 module.exports = eventController;

@@ -32,5 +32,27 @@ class Event {
       throw err;
     }
   }
+
+  async updateChosenEventData(param_id, updated_data, auth_id) {
+    try {
+      const id = shapeIntoMongooseObjectId(param_id),
+        mb_id = shapeIntoMongooseObjectId(auth_id);
+
+      console.log(updated_data);
+      const result = await eventModel
+        .findOneAndUpdate({ _id: id, seller_mb_id: mb_id }, updated_data, {
+          runValidators: true,
+          lean: true,
+          returnDocument: "after",
+        })
+        .exec();
+
+      assert.ok(result, Definer.general_err1);
+
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 module.exports = Event;
