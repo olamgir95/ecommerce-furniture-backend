@@ -43,10 +43,7 @@ body {
   flex-direction: row;
   align-items: center;
 }
-.maltimart_table .table-sm td,
-.table-bordered td {
-  text-align: center;
-}
+
 .maltimart_table table thead th {
   text-align: left;
 }

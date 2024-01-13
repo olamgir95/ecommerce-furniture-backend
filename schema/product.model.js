@@ -60,7 +60,7 @@ const productSchema = new mongoose.Schema(
       required: function () {
         return (
           this.product_collection === "gifts" ||
-          this.product_collection === "accessories"
+          this.product_collection === "electronics"
         );
       },
       enum: {

@@ -39,7 +39,7 @@
               <td><%=value.product_name%></td>
               <td><%=value.product_collection%></td>
               <td>
-                <%=value.product_collection==="gifts" || value.product_collection ==="accessories" ? value.product_color :
+                <%=value.product_collection==="gifts" || value.product_collection ==="electronics" ? value.product_color :
                 value.product_size%>
               </td>
               <td><%=value.product_price %> $</td>
@@ -110,7 +110,7 @@
               <label for="">Product category</label>
               <select name="product_collection" class="product_collection">
                 <option value="furniture" selected>Furniture</option>
-                <option value="accessories">Accessories</option>
+                <option value="electronics">Electronics</option>
                 <option value="household">Household</option>
                 <option value="wooden">Wooden</option>
                 <option value="gifts">Gifts</option>
@@ -221,7 +221,7 @@
     $(function () {
       $(".product_collection").on("change", function () {
         const selectedValue = $(this).val();
-        if (selectedValue === "gifts" || selectedValue === "accessories") {
+        if (selectedValue === "gifts" || selectedValue === "electronics") {
           $("#product_color").show();
           $("#product_size").hide();
         }  else {
