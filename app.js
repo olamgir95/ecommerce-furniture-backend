@@ -41,6 +41,6 @@ app.set("view engine", "ejs");
 
 // 4. Routing setup
 app.use("/", router);
-app.use("/resto", router_admin);
+app.use("/maltimart", router_admin);
 
 module.exports = app;

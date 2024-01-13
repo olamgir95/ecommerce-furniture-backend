@@ -54,7 +54,7 @@ const sellerController = {
       console.log("data", data);
     } catch (err) {
       console.log(`ERROR, cont/getMySellerProducts, ${err.message}`);
-      res.redirect("/resto");
+      res.redirect("/maltimart");
     }
   },
 
@@ -82,12 +82,12 @@ const sellerController = {
 
       req.session.member = result;
       req.session.save(function () {
-        res.redirect("/resto/products/menu");
+        res.redirect("/maltimart/products/menu");
       });
     } catch (err) {
       console.log(`ERROR, cont/signup, ${err.message}`);
       res.send(
-        ` <script>alert("${err.message}"); window.location.replace('/resto/sign-up');</script>
+        ` <script>alert("${err.message}"); window.location.replace('/maltimart/sign-up');</script>
           `
       );
     }
@@ -114,8 +114,8 @@ const sellerController = {
       console.log("res", result);
       req.session.save(function () {
         result.mb_type === "SELLER"
-          ? res.redirect("/resto/products/menu")
-          : res.redirect("/resto/all-sellers");
+          ? res.redirect("/maltimart/products/menu")
+          : res.redirect("/maltimart/all-sellers");
       });
     } catch (err) {
       console.log(`ERROR, cont/login, ${err.message}`);
@@ -127,7 +127,7 @@ const sellerController = {
     try {
       console.log("GET cont.logout");
       req.session.destroy(function () {
-        res.redirect("/resto");
+        res.redirect("/maltimart");
       });
     } catch (err) {
       console.log(`ERROR, cont/login, ${err.message}`);
@@ -160,7 +160,7 @@ const sellerController = {
       next();
     } else {
       const html = `<script>alert("Admin page: Permission denied!");
-          window.location.replace="/resto";
+          window.location.replace="/maltimart";
           </script>`;
       res.end(html);
     }

@@ -33,7 +33,7 @@ body {
   align-items: center;
 }
 
-.seller_container .resto_table {
+.seller_container .maltimart_table {
   position: relative;
   width: 85%;
   height: auto;
@@ -43,15 +43,15 @@ body {
   flex-direction: row;
   align-items: center;
 }
-.resto_table .table-sm td,
+.maltimart_table .table-sm td,
 .table-bordered td {
   text-align: center;
 }
-.resto_table table thead th {
+.maltimart_table table thead th {
   text-align: left;
 }
 
-.resto_table .table-sm thead tr {
+.maltimart_table .table-sm thead tr {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
