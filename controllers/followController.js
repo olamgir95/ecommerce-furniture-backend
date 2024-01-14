@@ -34,5 +34,23 @@ const followController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
+  getMemberFollowings: async (req, res) => {
+    try {
+      console.log(`GET: cont/getMemberFollowings`);
+
+      const { query } = req;
+      const follow = new Follow();
+
+      const result = await follow.getMemberFollowingsData(query);
+
+      assert.ok(result, Definer.general_err1);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getMemberFollowings, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
 };
 module.exports = followController;
