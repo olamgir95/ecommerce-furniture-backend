@@ -5,6 +5,9 @@ const cookieParser = require("cookie-parser");
 let session = require("express-session");
 const router = require("./router.js");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const cors = require("cors");
+const path = require("path");
+const http = require("http");
 
 const store = new MongoDBStore({
   uri: process.env.MONGO_URL,
@@ -12,10 +15,17 @@ const store = new MongoDBStore({
 });
 
 // 1. Initialization code
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  })
+);
 
 // 2. Session configuration
 app.use(
@@ -43,4 +53,6 @@ app.set("view engine", "ejs");
 app.use("/", router);
 app.use("/maltimart", router_admin);
 
-module.exports = app;
+const server = http.createServer(app);
+
+module.exports = server;

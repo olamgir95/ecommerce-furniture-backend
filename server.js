@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const http = require("http");
 const mongoose = require("mongoose");
 
 dotenv.config();
@@ -19,8 +18,7 @@ mongoose.connect(
       console.log("Mongoose connection successful");
       // console.log(goose);
 
-      const app = require("./app");
-      const server = http.createServer(app);
+      const server = require("./app");
       const port = process.env.PORT || 3002;
       server.listen(port, () => {
         console.log(
