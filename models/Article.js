@@ -161,7 +161,7 @@ class Article {
 
       if (member) {
         const member_obj = new Member();
-        await member_obj.viewChosenItemByMember(member, art_id, "community");
+        await member_obj.viewChosenItemByMember(member, art_id, "article");
       }
 
       const result = await articleModel.findById({ _id: art_id }).exec();

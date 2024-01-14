@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const { like_view_group_list, board_id_enum_list } = require("../lib/config");
+const { board_id_enum_list, like_view_group_list } = require("../lib/config");
 const Schema = mongoose.Schema;
 
-const viewSchema = new Schema(
+const likeSchema = new Schema(
   {
     mb_id: { type: Schema.Types.ObjectId, required: true },
-    view_ref_id: { type: Schema.Types.ObjectId, required: true },
-    view_group: {
+    like_ref_id: { type: Schema.Types.ObjectId, required: true },
+    like_group: {
       type: String,
       required: true,
       enum: {
@@ -22,4 +22,4 @@ const viewSchema = new Schema(
   { timestamps: { createdAt: true } }
 );
 
-module.exports = mongoose.model("View", viewSchema);
+module.exports = mongoose.model("like", likeSchema);

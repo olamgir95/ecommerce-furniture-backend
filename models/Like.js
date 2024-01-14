@@ -1,20 +1,21 @@
+const Definer = require("../lib/mistake");
 const articleModel = require("../schema/article.model");
+const likeModel = require("../schema/like.model");
 const memberModel = require("../schema/member.model");
 const productModel = require("../schema/product.model");
-const viewModel = require("../schema/view.model");
 
-class View {
+class Like {
   constructor(mb_id) {
     this.mb_id = mb_id;
   }
-  async validateChosenTarget(view_ref_id, group_type) {
+  async validateTargetItem(like_ref_id, group_type) {
     try {
       let result;
       switch (group_type) {
         case "member":
           result = await memberModel
             .findOne({
-              _id: view_ref_id,
+              _id: like_ref_id,
               mb_status: "ACTIVE",
             })
             .exec();
@@ -22,7 +23,7 @@ class View {
         case "product":
           result = await productModel
             .findOne({
-              _id: view_ref_id,
+              _id: like_ref_id,
               product_status: "PROCESS",
             })
             .exec();
@@ -30,7 +31,7 @@ class View {
         case "article":
           result = await articleModel
             .findOne({
-              _id: view_ref_id,
+              _id: like_ref_id,
               art_status: "active",
             })
             .exec();
@@ -42,41 +43,59 @@ class View {
     }
   }
 
-  async insertMemberView(view_ref_id, group_type) {
+  async insertMemberLike(like_ref_id, group_type) {
     try {
-      const new_view = new viewModel({
+      const new_like = new likeModel({
         mb_id: this.mb_id,
-        view_ref_id: view_ref_id,
-        view_group: group_type,
+        like_ref_id: like_ref_id,
+        like_group: group_type,
       });
-      const result = await new_view.save();
-      //target items view sonini bittaga oshiramiz
-      await this.modifyItemViewCounts(view_ref_id, group_type);
+      const result = await new_like.save();
+      await this.modifyItemlikeCounts(like_ref_id, group_type, 1);
+      return result;
+    } catch (err) {
+      throw new Error(Definer.mongo_validation_err1);
+    }
+  }
+
+  async removeMemberLike(like_ref_id, group_type) {
+    try {
+      const result = await likeModel.findOneAndDelete({
+        mb_id: this.mb_id,
+        like_ref_id: like_ref_id,
+      });
+      await this.modifyItemlikeCounts(like_ref_id, group_type, -1);
       return result;
     } catch (err) {
       throw err;
     }
   }
 
-  async modifyItemViewCounts(view_ref_id, group_type) {
+  async modifyItemlikeCounts(like_ref_id, group_type, modifier) {
     try {
       switch (group_type) {
         case "member":
           await memberModel
-            .findByIdAndUpdate({ _id: view_ref_id }, { $inc: { mb_views: 1 } })
+            .findByIdAndUpdate(
+              { _id: like_ref_id },
+              { $inc: { mb_likes: modifier } }
+            )
             .exec();
           break;
         case "product":
           await productModel
             .findByIdAndUpdate(
-              { _id: view_ref_id },
-              { $inc: { product_views: 1 } }
+              { _id: like_ref_id },
+              { $inc: { product_likes: modifier } }
             )
             .exec();
           break;
         case "article":
           await articleModel
-            .findByIdAndUpdate({ _id: view_ref_id }, { $inc: { art_views: 1 } })
+            .findByIdAndUpdate(
+              { _id: like_ref_id },
+              { $inc: { art_likes: modifier } }
+            )
             .exec();
           break;
       }
@@ -86,19 +105,19 @@ class View {
     }
   }
 
-  async checkViewExistence(view_ref_id) {
+  async checkLikeExistence(like_ref_id) {
     try {
-      const view = await viewModel
+      const like = await likeModel
         .findOne({
           mb_id: this.mb_id,
-          view_ref_id: view_ref_id,
+          like_ref_id: like_ref_id,
         })
         .exec();
-      return view ? true : false;
+      return like ? true : false;
     } catch (err) {
       throw err;
     }
   }
 }
 
-module.exports = View;
+module.exports = Like;
