@@ -70,7 +70,7 @@ const communityController = {
 
       res.json({ state: "success", data: result });
     } catch (err) {
-      console.log(`ERROR, cont/Articles, ${err.message}`);
+      console.log(`ERROR, cont/getArticles, ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },
@@ -97,6 +97,19 @@ const communityController = {
       await res.json({ state: "success", data: result });
     } catch (err) {
       console.log(`ERROR, cont/updateArticlesStatus, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+
+  getChosenArticle: async (req, res) => {
+    try {
+      console.log("cont/getChosenArticle");
+      const art_id = req.params.art_id,
+        article = new Article(),
+        result = await article.getChosenArticleData(req.member, art_id);
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getChosenArticle, ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },
