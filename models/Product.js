@@ -1,5 +1,5 @@
 const assert = require("assert");
-const ProductModel = require("../schema/product.model");
+const productModel = require("../schema/product.model");
 const {
   shapeIntoMongooseObjectId,
   lookup_auth_member_liked,
@@ -8,9 +8,7 @@ const Definer = require("../lib/mistake");
 const Member = require("./Member");
 
 class Product {
-  constructor() {
-    this.productModel = ProductModel;
-  }
+  constructor() {}
 
   async getAllProductsData(member, data) {
     try {
@@ -24,7 +22,7 @@ class Product {
         data.order === "product_price"
           ? { [data.order]: 1 }
           : { [data.order]: -1 };
-      const result = await this.productModel
+      const result = await productModel
         .aggregate([
           { $match: match },
           { $sort: sort },
@@ -50,7 +48,7 @@ class Product {
         await member_obj.viewChosenItemByMember(member, id, "product");
       }
 
-      const result = await this.productModel
+      const result = await productModel
         .aggregate([
           { $match: { _id: id, product_status: "PROCESS" } },
           lookup_auth_member_liked(auth_mb_id),
@@ -68,7 +66,7 @@ class Product {
     try {
       data.seller_mb_id = shapeIntoMongooseObjectId(member._id);
 
-      const new_product = new this.productModel(data);
+      const new_product = new productModel(data);
       const result = await new_product.save();
 
       assert.ok(result, Definer.product_err1);
@@ -85,7 +83,7 @@ class Product {
         mb_id = shapeIntoMongooseObjectId(auth_id);
 
       console.log(updated_data);
-      const result = await this.productModel
+      const result = await productModel
         .findOneAndUpdate({ _id: id, seller_mb_id: mb_id }, updated_data, {
           runValidators: true,
           lean: true,
@@ -104,7 +102,7 @@ class Product {
   async getMySellerProductsData(member) {
     try {
       member._id = shapeIntoMongooseObjectId(member?._id);
-      const result = await this.productModel.find({
+      const result = await productModel.find({
         seller_mb_id: member._id,
       });
       assert.ok(result, Definer.general_err1);

@@ -7,6 +7,7 @@ const orderController = require("./controllers/orderController");
 const communityController = require("./controllers/CommunityController");
 const followController = require("./controllers/followController");
 const uploader_community = require("./utils/upload-multer")("community");
+const uploader_member = require("./utils/upload-multer")("members");
 
 /*************************/
 /*  REST API  */
@@ -26,6 +27,13 @@ router.post(
   "/member-liken",
   memberController.retrieveAuthMember,
   memberController.likeMemberChosen
+);
+
+router.post(
+  "/member/update",
+  memberController.retrieveAuthMember,
+  uploader_member.single("mb_image"),
+  memberController.updateMember
 );
 
 //Product related routers

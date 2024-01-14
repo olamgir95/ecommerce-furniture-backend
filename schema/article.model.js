@@ -51,4 +51,4 @@ const boArticleSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("boArticle", boArticleSchema);
+module.exports = mongoose.model("Article", boArticleSchema);

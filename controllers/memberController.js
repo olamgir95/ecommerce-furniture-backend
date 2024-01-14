@@ -126,6 +126,25 @@ const memberController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
+  updateMember: async (req, res) => {
+    try {
+      console.log("POST, cont/updateMember");
+      assert.ok(req.member, Definer.auth_err5);
+      const member = new Member();
+
+      const result = await member.updateMemberData(
+        req.member?._id,
+        req.body,
+        req.file
+      );
+      console.log("res,", result);
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/updateMember, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
 };
 
-memberController = module.exports;
+module.exports = memberController;
