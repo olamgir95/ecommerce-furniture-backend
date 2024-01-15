@@ -41,6 +41,7 @@ const memberSchema = new mongoose.Schema(
     },
     mb_address: {
       type: String,
+      default: "Seoul, South Korea",
       required: false,
     },
     mb_description: {
@@ -59,7 +60,7 @@ const memberSchema = new mongoose.Schema(
     mb_top: {
       type: String,
       required: false,
-      default: "N",
+      default: "yes",
       enum: {
         values: ordinary_enums,
         message: "{VALUE} is not among permitted values",

@@ -20,7 +20,7 @@ class Seller {
 
       switch (data.order) {
         case "top":
-          match["mb_top"] = "Y";
+          match["mb_top"] = "yes";
           aggregationQuery.push({ $match: match });
           aggregationQuery.push({ $sample: { size: data.limit } });
           break;

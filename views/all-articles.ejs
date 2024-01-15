@@ -26,17 +26,16 @@
 
             <thead class="thead-light">
               <th scope="col">T/r</th>
-              <th scope="col"> name</th>
-              <th scope="col"> phone</th>
-              <th scope="col"> subject</th>
-              <th scope="col"> board id</th>
-              <th scope="col"> status</th>
+              <th scope="col"> Name</th>
+          
+              <th scope="col"> Subject</th>
+              <th scope="col"> Category</th>
+              <th scope="col"> Status</th>
             </thead>
             <% article_data.map(function(value, key){ %>
             <tr class="bg-white">
               <th scope="row"><%= key+1%></th>
               <td><%= value.member_data.mb_nick%></td>
-              <td><%= value.member_data.mb_phone%></td>
               <td><%= value.art_subject%></td>
               <td><%= value.bo_id%></td>
               <td style="width: 13%">

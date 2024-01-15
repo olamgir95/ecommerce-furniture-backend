@@ -37,7 +37,7 @@
               <td style="width: 13%">
                 <label class="switch">
                   <input type="checkbox" class="mb_top" id="<%= value._id%>" 
-                  <%= value.mb_top ==="Y" ? "checked" : "" %> />
+                  <%= value.mb_top ==="yes" ? "checked" : "" %> />
                   <span class="slider round"></span>
                 </label>
               </td>
@@ -63,7 +63,7 @@
       //manipulate sellers top features
       $(".mb_top").on("change", function (e) {
         const id = e.target.id;
-        const mb_top = e.target.checked ? "Y" : "N";
+        const mb_top = e.target.checked ? "yes" : "no";
         axios
           .post("/maltimart/all-sellers/edit", { id: id, mb_top: mb_top })
           .then((response) => {
