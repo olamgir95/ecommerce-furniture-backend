@@ -45,10 +45,7 @@ const productSchema = new mongoose.Schema(
     product_size: {
       type: String,
       default: "normal",
-      required: function () {
-        const sized_list = ["furniture", "wooden", "household"];
-        return sized_list.includes(this.product_collection);
-      },
+      required: true,
       enum: {
         values: product_size_enums,
         message: "{VALUE} is not among permitted enum values",
@@ -57,12 +54,7 @@ const productSchema = new mongoose.Schema(
     product_color: {
       type: String,
       default: "white" || "black",
-      required: function () {
-        return (
-          this.product_collection === "gifts" ||
-          this.product_collection === "electronics"
-        );
-      },
+      required: true,
       enum: {
         values: product_color_enums,
         message: "{VALUE} is not among permitted enum values",

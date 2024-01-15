@@ -39,7 +39,7 @@
               <td><%=value.product_name%></td>
               <td><%=value.product_collection%></td>
               <td>
-                <%=value.product_collection==="gifts" || value.product_collection ==="electronics" ? value.product_color :
+                <%=value.product_collection==="wardrobs" || value.product_collection ==="tables" ? value.product_color :
                 value.product_size%>
               </td>
               <td><%=value.product_price %> $</td>
@@ -67,7 +67,8 @@
           <div class="long_input align-items-center d-flex mb-5">
             <span class="new_furniture_txt">New Product</span>
           </div>
-          <div class="long_input">
+          <div class="half_input_frame">
+          <div class="half_input">
             <div>
               <label for="">Product name</label>
               <input
@@ -84,6 +85,19 @@
               hidden
             />
           </div>
+          <div class="half_input">
+            <label for="">Product category</label>
+            <select name="product_collection" class="product_collection">
+              <option value="beds" selected>Beds</option>
+              <option value="sofas" selected>Sofas</option>
+              <option value="armchairs" selected>Armchairs</option>
+              <option value="tables">Tables</option>
+              <option value="chairs">Chairs</option>
+              <option value="wooden">Wooden</option>
+              <option value="wardrobs">Wardrobs</option>
+            </select>
+          </div>
+        </div>
           <div class="half_input_frame">
             <div class="half_input">
               <label for="">Product price</label>
@@ -106,16 +120,7 @@
           </div>
 
           <div class="half_input_frame">
-            <div class="half_input">
-              <label for="">Product category</label>
-              <select name="product_collection" class="product_collection">
-                <option value="furniture" selected>Furniture</option>
-                <option value="electronics">Electronics</option>
-                <option value="household">Household</option>
-                <option value="wooden">Wooden</option>
-                <option value="gifts">Gifts</option>
-              </select>
-            </div>
+           
 
             <div class="half_input" id="product_size">
               <label for="">Product size</label>
@@ -127,15 +132,18 @@
               </select>
             </div>
 
-            <div class="half_input" id="product_color" style="display: none">
+            <div class="half_input" id="product_color" >
               <label for="">Product color </label>
               <select name="product_color" class="product_color" >
                 <option selected value="white">white</option>
                 <option value="red">red</option>
                 <option value="green">green</option>
                 <option value="black">black</option>
-                <option value="grey">grey</option>
+                <option value="gray">gray</option>
+                <option value="light gray">light gray</option>
                 <option value="mixed">mixed</option>
+                <option value="brown">brown</option>
+                <option value="other">other</option>
               </select>
             </div>
 
@@ -219,16 +227,16 @@
   </div>
   <script>
     $(function () {
-      $(".product_collection").on("change", function () {
-        const selectedValue = $(this).val();
-        if (selectedValue === "gifts" || selectedValue === "electronics") {
-          $("#product_color").show();
-          $("#product_size").hide();
-        }  else {
-          $("#product_color").hide();
-          $("#product_size").show();
-        }
-      });
+      // $(".product_collection").on("change", function () {
+      //   const selectedValue = $(this).val();
+      //   if (selectedValue === "wardrobs" || selectedValue === "tables") {
+      //     $("#product_color").show();
+      //     $("#product_size").hide();
+      //   }  else {
+      //     $("#product_color").hide();
+      //     $("#product_size").show();
+      //   }
+      // });
 
       $(".hiding_btn").on("click", () => {
         $(".hiding_btn").css("display", "none");
