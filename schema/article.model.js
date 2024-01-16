@@ -30,7 +30,7 @@ const boArticleSchema = new Schema(
     art_status: {
       type: String,
       required: false,
-      default: "active",
+      default: "Active",
       enum: {
         values: board_article_status_enum_list,
         message: "{VALUE} is not among permitted values",

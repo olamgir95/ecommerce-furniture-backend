@@ -85,7 +85,7 @@ class Article {
 
       const result = await articleModel
         .aggregate([
-          { $match: { mb_id: mb_id, art_status: "active" } },
+          { $match: { mb_id: mb_id, art_status: "Active" } },
           {
             $sort: { createdAt: -1 },
           },
@@ -116,8 +116,8 @@ class Article {
       const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
       let matches =
         inquiry.bo_id === "all"
-          ? { bo_id: { $in: board_id_enum_list }, art_status: "active" }
-          : { bo_id: inquiry.bo_id, art_status: "active" };
+          ? { bo_id: { $in: board_id_enum_list }, art_status: "Active" }
+          : { bo_id: inquiry.bo_id, art_status: "Active" };
 
       const limit = (inquiry.limit *= 1);
       const page = (inquiry.page *= 1);

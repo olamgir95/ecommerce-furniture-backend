@@ -32,7 +32,7 @@ class Like {
           result = await articleModel
             .findOne({
               _id: like_ref_id,
-              art_status: "active",
+              art_status: "Active",
             })
             .exec();
           break;

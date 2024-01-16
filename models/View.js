@@ -31,7 +31,7 @@ class View {
           result = await articleModel
             .findOne({
               _id: view_ref_id,
-              art_status: "active",
+              art_status: "Active",
             })
             .exec();
           break;

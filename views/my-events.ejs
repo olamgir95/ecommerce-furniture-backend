@@ -40,11 +40,11 @@
               <td>
                 <%=value.event_location%>
               </td>
-              <td><%=new Date(value.createdAt).toLocaleDateString() %></td>
+              <td><%=new Date(value.event_date).toLocaleDateString() %></td>
               <td>
                 <select class="spec_select new_event_status"  id="<%= value._id %>" >
-                  <option value="PROCESS" <%= value.event_status === 'PROCESS' ? 'selected' : '' %> > PROCESS</option>
-                  <option value="PAUSED" <%= value.event_status === 'PAUSED' ? 'selected' : '' %> > PAUSED</option>
+                  <option value="Active" <%= value.event_status === 'Active' ? 'selected' : '' %> > Active</option>
+                  <option value="Deleted" <%= value.event_status === 'Deleted' ? 'selected' : '' %> > Deleted</option>
                 </select>
               </td>
             </tbody>
@@ -76,7 +76,7 @@
             </div>
             <input
               name="event_status"
-              value="PROCESS"
+              value="Active"
               class="event_status"
               hidden
             />
@@ -90,9 +90,11 @@
                 class="event_location"
               />
             </div>
+          
          
           </div>
-          <div class="long_input">
+          <div class="half_input_frame">
+          <div class="half_input">
             <label for="event description">Event description</label>
             <textarea
               name="event_description"
@@ -102,6 +104,12 @@
               rows="10"
             ></textarea>
           </div>
+          <div class="half_input">
+
+            <label for="eventDate">Event date</label>
+            <input type="date" id="eventDate" name="eventDate">
+          </div >
+        </div>
           <div class="img_frame event">
             <label for="">Event photo</label>
             <div class="media-frame">
@@ -150,6 +158,9 @@
         $(".furniture_container").slideToggle(500).show();
       });
     });
+
+ 
+
     // event status changer
     $(".new_event_status").on("change", async function (e) {
       const id = e.target.id;
@@ -179,12 +190,13 @@
         event_location = $(".event_location").val(),
         event_description = $(".event_description").val(),
         event_status = $(".new_event_status").val();
+        event_date = $("#eventDate").val();
       if (
         seller_mb_id==="" ||
         event_title==="" ||
         event_description==="" ||
         event_location ===""||
-        event_status===""
+        event_status===""||  event_date===""
       ) {
      
         alert("Please fill out all required fields!");
@@ -209,7 +221,6 @@
         }
       }
     }
- 
-  </script>
+</script>
 </body>
 <%- include('includes/footer') %>

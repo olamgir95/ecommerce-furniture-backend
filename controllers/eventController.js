@@ -7,10 +7,9 @@ const eventController = {
     try {
       console.log("POST: cont/addNewEvent");
       assert(req.file, Definer.general_err3);
-
+      console.log(req.body);
       const event = new Event();
       const data = req.body;
-      data.seller_mb_nick = req.member?.mb_nick;
       data.event_image = req?.file?.path.replace(/\\/g, "/");
 
       const result = await event.addNewEventData(data, req.member);
@@ -36,6 +35,25 @@ const eventController = {
       res.json({ state: "success", data: result });
     } catch (err) {
       console.log(`ERROR, cont/updateChosenEvent, ${err.message}`);
+      res.json({ state: "fail", message: err.message });
+    }
+  },
+
+  getSellerEvents: async (req, res) => {
+    try {
+      console.log(`GET: cont/getSellerEvents`);
+      assert.ok(req.member, Definer.auth_err5);
+
+      const { member, query } = req;
+      const event = new Event();
+      console.log("inqueruy", query);
+      const result = await event.getSellerEventsData(member, query);
+
+      assert.ok(result, Definer.general_err1);
+
+      res.json({ state: "success", data: result });
+    } catch (err) {
+      console.log(`ERROR, cont/getSellerEvents, ${err.message}`);
       res.json({ state: "fail", message: err.message });
     }
   },

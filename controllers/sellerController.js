@@ -66,7 +66,6 @@ const sellerController = {
       const event = new Event();
       const data = await event.getMySellerEventsData(req.session.member);
       res.render("my-events", { my_events_data: data });
-      console.log("data", data);
     } catch (err) {
       console.log(`ERROR, cont/getMySellerEvents, ${err.message}`);
       res.redirect("/maltimart");

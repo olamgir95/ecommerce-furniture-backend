@@ -59,7 +59,7 @@ class Seller {
 
       const result = await memberModel
         .aggregate([
-          { $match: { _id: id, mb_status: "ACTIVE" } },
+          { $match: { _id: id, mb_status: "Active" } },
           lookup_auth_member_liked(auth_mb_id),
         ])
         .exec();
