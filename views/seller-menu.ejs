@@ -28,6 +28,7 @@
               <th scope="col">Product name</th>
               <th scope="col">Product category</th>
               <th scope="col">Product size</th>
+              <th scope="col">Product color</th>
               <th scope="col">Product price</th>
               <th scope="col">Product amount</th>
               <th scope="col">Product status</th>
@@ -38,9 +39,9 @@
               <td><%=key+1%></td>
               <td><%=value.product_name%></td>
               <td><%=value.product_collection%></td>
-              <td>
-                <%=value.product_collection==="wardrobs" || value.product_collection ==="tables" ? value.product_color :
-                value.product_size%>
+              <td> <%=value.product_size%>
+              </td>
+              <td><%=value.product_color%>
               </td>
               <td><%=value.product_price %> $</td>
               <td><%=value.product_left_cnt %></td>
@@ -88,13 +89,13 @@
           <div class="half_input">
             <label for="">Product category</label>
             <select name="product_collection" class="product_collection">
-              <option value="beds" selected>Beds</option>
-              <option value="sofas" selected>Sofas</option>
-              <option value="armchairs" selected>Armchairs</option>
-              <option value="tables">Tables</option>
-              <option value="chairs">Chairs</option>
+              <option value="bed" selected>Bed</option>
+              <option value="sofa" selected>Sofa</option>
+              <option value="armchair" selected>Armchair</option>
+              <option value="table">Table</option>
+              <option value="chair">Chair</option>
               <option value="wooden">Wooden</option>
-              <option value="wardrobs">Wardrobs</option>
+              <option value="wardrob">Wardrob</option>
             </select>
           </div>
         </div>
@@ -143,6 +144,7 @@
                 <option value="light gray">light gray</option>
                 <option value="mixed">mixed</option>
                 <option value="brown">brown</option>
+                <option value="blue">blue</option>
                 <option value="other">other</option>
               </select>
             </div>
@@ -229,7 +231,7 @@
     $(function () {
       // $(".product_collection").on("change", function () {
       //   const selectedValue = $(this).val();
-      //   if (selectedValue === "wardrobs" || selectedValue === "tables") {
+      //   if (selectedValue === "wardrob" || selectedValue === "tables") {
       //     $("#product_color").show();
       //     $("#product_size").hide();
       //   }  else {

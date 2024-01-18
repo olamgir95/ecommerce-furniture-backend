@@ -16,12 +16,24 @@ class Product {
       let match = { product_status: "PROCESS" };
       if (data.seller_mb_id) {
         match["seller_mb_id"] = shapeIntoMongooseObjectId(data.seller_mb_id);
+      }
+
+      if (data.product_collection) {
         match["product_collection"] = data.product_collection;
       }
+
       const sort =
         data.order === "product_price"
           ? { [data.order]: 1 }
           : { [data.order]: -1 };
+
+      if (data.order === "product_price" && data.product_price) {
+        match["product_price"] = { $lt: data.product_price };
+      }
+      if (data.product_color) {
+        match["product_color"] = { $eq: data.product_color };
+      }
+
       const result = await productModel
         .aggregate([
           { $match: match },

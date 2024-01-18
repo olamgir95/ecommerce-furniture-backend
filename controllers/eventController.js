@@ -42,11 +42,9 @@ const eventController = {
   getSellerEvents: async (req, res) => {
     try {
       console.log(`GET: cont/getSellerEvents`);
-      assert.ok(req.member, Definer.auth_err5);
 
       const { member, query } = req;
       const event = new Event();
-      console.log("inqueruy", query);
       const result = await event.getSellerEventsData(member, query);
 
       assert.ok(result, Definer.general_err1);
