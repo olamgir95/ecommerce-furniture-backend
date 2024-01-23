@@ -27,8 +27,11 @@ class Product {
           ? { [data.order]: 1 }
           : { [data.order]: -1 };
 
-      if (data.order === "product_price" && data.product_price) {
-        match["product_price"] = { $lt: data.product_price };
+      if (data.order === "product_price") {
+        match["product_price"] = {
+          $gte: data.product_price_min,
+          $lte: data.product_price_max,
+        };
       }
       if (data.product_color) {
         match["product_color"] = { $eq: data.product_color };

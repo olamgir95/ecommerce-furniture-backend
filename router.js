@@ -46,7 +46,7 @@ router.post(
 );
 
 router.get(
-  "/products/:id",
+  "/product/:id",
   memberController.retrieveAuthMember,
   productController.getChosenProduct
 );

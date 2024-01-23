@@ -59,7 +59,6 @@ const communityController = {
   getArticles: async (req, res) => {
     try {
       console.log(`GET: cont/getArticles`);
-      assert.ok(req.member, Definer.auth_err5);
 
       const { member, query } = req;
       const article = new Article();
