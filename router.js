@@ -99,13 +99,13 @@ router.post(
 );
 
 router.get(
-  "/community/articles",
+  "/community/member-articles",
   memberController.retrieveAuthMember,
   communityController.getMemberArticles
 );
 
 router.get(
-  "/community/target",
+  "/community/all-articles",
   memberController.retrieveAuthMember,
   communityController.getArticles
 );

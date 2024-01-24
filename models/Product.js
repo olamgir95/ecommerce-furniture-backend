@@ -25,6 +25,8 @@ class Product {
       const sort =
         data.order === "product_price"
           ? { [data.order]: 1 }
+          : data.order === "sale"
+          ? { createdAt: -1 }
           : { [data.order]: -1 };
 
       if (data.order === "product_price") {
