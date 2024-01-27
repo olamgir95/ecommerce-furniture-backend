@@ -12,23 +12,15 @@ class Order {
         delivery_cost = 0;
       const mb_id = shapeIntoMongooseObjectId(member._id);
 
-      data.map(({ quantity, price }) => {
-        order_total_amount += quantity * price;
+      data.map(({ quantity, price, sale_price }) => {
+        order_total_amount += quantity * (sale_price ?? price);
       });
 
-      if (order_total_amount < 100) {
-        delivery_cost = 2;
-        order_total_amount += delivery_cost;
-      }
       const order_id = await this.saveOrderData(
         order_total_amount,
         delivery_cost,
         mb_id
       );
-
-      console.log("order_id:::", order_id);
-
-      //order item creation
 
       await this.recordOrderItemsData(order_id, data);
 

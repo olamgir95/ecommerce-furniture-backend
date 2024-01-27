@@ -13,7 +13,7 @@ class Article {
 
   async createArticleData(member, data) {
     try {
-      data.mb_id = shapeIntoMongooseObjectId(member._id);
+      data.mb_id = shapeIntoMongooseObjectId(member?._id);
 
       const new_article = await this.saveArticleData(data);
       return new_article;
