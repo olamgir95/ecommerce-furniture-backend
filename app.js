@@ -64,4 +64,29 @@ app.use("/maltimart", router_admin);
 
 const server = http.createServer(app);
 
+//SOCKET.IO BACKEND SERVER //
+const io = require("socket.io")(server, {
+  serveClient: false,
+  origin: "*:*",
+  transport: ["websocket", "xhr-polling"],
+});
+let online_users = 0;
+io.on("connection", function (socket) {
+  online_users++;
+  console.log(`New user :`, online_users);
+  socket.emit("greetMsg", { text: "Welcome" });
+  io.emit("infoUsers", { total: online_users });
+
+  socket.on("disconnect", () => {
+    online_users--;
+    socket.broadcast.emit("infoUsers", { total: online_users });
+    console.log("client disconnected, total:", online_users);
+  });
+
+  socket.on("createMsg", (data) => {
+    console.log(data);
+    io.emit("newMsg", data);
+  });
+});
+
 module.exports = server;
