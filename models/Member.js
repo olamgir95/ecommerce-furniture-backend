@@ -105,7 +105,7 @@ class Member {
   async likeChosenItemByMember(member, like_ref_id, group_type) {
     try {
       like_ref_id = shapeIntoMongooseObjectId(like_ref_id);
-      const mb_id = shapeIntoMongooseObjectId(member._id);
+      const mb_id = shapeIntoMongooseObjectId(member?._id);
 
       const like = new Like(mb_id);
       //validation needed

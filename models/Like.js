@@ -1,5 +1,6 @@
 const Definer = require("../lib/mistake");
 const articleModel = require("../schema/article.model");
+const commentModel = require("../schema/comment.model");
 const likeModel = require("../schema/like.model");
 const memberModel = require("../schema/member.model");
 const productModel = require("../schema/product.model");
@@ -33,6 +34,13 @@ class Like {
             .findOne({
               _id: like_ref_id,
               art_status: "Active",
+            })
+            .exec();
+          break;
+        case "comment":
+          result = await commentModel
+            .findOne({
+              _id: like_ref_id,
             })
             .exec();
           break;
@@ -95,6 +103,14 @@ class Like {
             .findByIdAndUpdate(
               { _id: like_ref_id },
               { $inc: { art_likes: modifier } }
+            )
+            .exec();
+          break;
+        case "comment":
+          await commentModel
+            .findByIdAndUpdate(
+              { _id: like_ref_id },
+              { $inc: { comment_likes: modifier } }
             )
             .exec();
           break;

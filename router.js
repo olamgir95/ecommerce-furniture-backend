@@ -7,6 +7,7 @@ const orderController = require("./controllers/orderController");
 const communityController = require("./controllers/CommunityController");
 const followController = require("./controllers/followController");
 const eventController = require("./controllers/eventController");
+const commentController = require("./controllers/commentController");
 const uploader_community = require("./utils/upload-multer")("community");
 const uploader_member = require("./utils/upload-multer")("members");
 
@@ -142,6 +143,25 @@ router.get(
   "/events/target",
   memberController.retrieveAuthMember,
   eventController.getSellerEvents
+);
+
+//comment
+router.post(
+  "/comments/create",
+  memberController.retrieveAuthMember,
+  commentController.createComment
+);
+
+router.post(
+  "/reply/comments",
+  memberController.retrieveAuthMember,
+  commentController.replyComment
+);
+
+router.get(
+  "/comments",
+  memberController.retrieveAuthMember,
+  commentController.getAllComment
 );
 
 module.exports = router;

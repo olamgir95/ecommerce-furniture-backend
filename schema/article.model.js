@@ -5,7 +5,7 @@ const {
 } = require("../lib/config");
 const Schema = mongoose.Schema;
 
-const boArticleSchema = new Schema(
+const articleSchema = new Schema(
   {
     art_subject: {
       type: String,
@@ -51,4 +51,4 @@ const boArticleSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Article", boArticleSchema);
+module.exports = mongoose.model("Article", articleSchema);

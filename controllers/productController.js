@@ -15,6 +15,7 @@ const productController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
   getChosenProduct: async (req, res) => {
     try {
       console.log(`GET: cont/getChosenProduct `);

@@ -111,6 +111,7 @@ class Article {
       throw err;
     }
   }
+
   async getArticlesData(member, inquiry) {
     try {
       const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
@@ -125,7 +126,6 @@ class Article {
       const sort = inquiry.order
         ? { [`${inquiry.order}`]: -1 }
         : { createdAt: -1 };
-
       const result = await articleModel
         .aggregate([
           { $match: matches },

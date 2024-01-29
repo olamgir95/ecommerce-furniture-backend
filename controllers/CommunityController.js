@@ -56,6 +56,7 @@ const communityController = {
       res.json({ state: "fail", message: err.message });
     }
   },
+
   getArticles: async (req, res) => {
     try {
       console.log(`GET: cont/getArticles`);
