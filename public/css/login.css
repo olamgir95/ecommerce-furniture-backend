@@ -20,11 +20,11 @@ html {
   position: relative;
   display: flex;
   margin-top: 100px;
+  align-items: center;
   justify-content: center;
 }
 
 .login_container .login_frame {
-  margin-top: 100px;
   position: relative;
   width: 420px;
   height: auto;
@@ -252,7 +252,7 @@ html {
 
 #snell {
   position: absolute;
-  top: 0;
+  top: -52px;
   width: 100%;
 }
 
