@@ -378,7 +378,6 @@
     let filename = "";
     fileTarget.on("change", function () {
       if (window.FileReader) {
-        console.log("red", window);
         const uploading_file = $(this)[0].files[0];
         console.log(uploading_file);
         const fileType = uploading_file["type"];

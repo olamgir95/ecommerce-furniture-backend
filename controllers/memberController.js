@@ -138,7 +138,6 @@ const memberController = {
         req.body,
         req.file
       );
-      console.log("res,", result);
       res.json({ state: "success", data: result });
     } catch (err) {
       console.log(`ERROR, cont/updateMember, ${err.message}`);

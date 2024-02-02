@@ -29,7 +29,6 @@ class Event {
       const result = await new_event.save();
 
       assert.ok(result, Definer.event_err1);
-      console.log("res", result);
       return result;
     } catch (err) {
       throw err;
@@ -89,7 +88,6 @@ class Event {
           lookup_auth_member_liked(auth_mb_id),
         ])
         .exec();
-      console.log("res", result);
       assert.ok(result, Definer.article_err3);
 
       return result;

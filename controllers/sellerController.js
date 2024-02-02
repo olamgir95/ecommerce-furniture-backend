@@ -53,7 +53,6 @@ const sellerController = {
       const product = new Product();
       const data = await product.getMySellerProductsData(req.session.member);
       res.render("seller-menu", { seller_data: data });
-      console.log("data", data);
     } catch (err) {
       console.log(`ERROR, cont/getMySellerProducts, ${err.message}`);
       res.redirect("/maltimart");
@@ -124,7 +123,6 @@ const sellerController = {
         result = await member.loginData(data);
 
       req.session.member = result;
-      console.log("res", result);
       req.session.save(function () {
         result.mb_type === "SELLER"
           ? res.redirect("/maltimart/products/menu")

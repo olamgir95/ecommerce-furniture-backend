@@ -60,7 +60,6 @@ class Article {
   async updateArticleByAdminData(update_data) {
     try {
       const id = shapeIntoMongooseObjectId(update_data?.id);
-      console.log("update", update_data);
       const result = await articleModel
         .findByIdAndUpdate({ _id: id }, update_data, {
           runValidators: true,

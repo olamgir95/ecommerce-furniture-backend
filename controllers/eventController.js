@@ -7,7 +7,6 @@ const eventController = {
     try {
       console.log("POST: cont/addNewEvent");
       assert(req.file, Definer.general_err3);
-      console.log(req.body);
       const event = new Event();
       const data = req.body;
       data.event_image = req?.file?.path.replace(/\\/g, "/");

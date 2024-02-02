@@ -110,7 +110,6 @@ class Order {
           },
         ])
         .exec();
-      console.log(result);
       return result;
     } catch (err) {
       throw err;
