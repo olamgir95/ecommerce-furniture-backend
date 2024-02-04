@@ -11,29 +11,27 @@
   <div class="container">
     <% if(!member){%>
     <div class="btn">
-      <a class="nav-link" aria-current="page" href="/maltimart/sign-up"
-        >Signup</a
-      >
+      <a class="nav-link" aria-current="page" href="/furni/sign-up">Signup</a>
     </div>
     <div class="btn">
-      <a class="nav-link" aria-current="page" href="/maltimart/login">Login</a>
+      <a class="nav-link" aria-current="page" href="/furni/login">Login</a>
       <%} else if (member.mb_type ==="ADMIN") {%>
       <div class="btn">
-        <a class="nav-link" aria-current="page" href="/maltimart/all-sellers"
+        <a class="nav-link" aria-current="page" href="/furni/all-sellers"
           >All Brands</a
         >
       </div>
       <div class="btn" onclick="return confirm('Do you want logout?')">
-        <a class="nav-link" href="/maltimart/logout">Logout</a>
+        <a class="nav-link" href="/furni/logout">Logout</a>
       </div>
       <%} else {%>
       <div class="btn">
-        <a class="nav-link" aria-current="page" href="/maltimart/products/menu"
+        <a class="nav-link" aria-current="page" href="/furni/products/menu"
           >Mypage</a
         >
       </div>
       <div class="btn" onclick="return confirm('Do you want logout?')">
-        <a class="nav-link" href="/maltimart/logout">Logout</a>
+        <a class="nav-link" href="/furni/logout">Logout</a>
       </div>
       <%}%>
     </div>

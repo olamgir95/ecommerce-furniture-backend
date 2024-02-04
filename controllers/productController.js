@@ -43,7 +43,7 @@ const productController = {
       const result = await product.addNewProductData(data, req.member);
 
       const html = `<script> alert("New product added successfully");
-      window.location.replace('/maltimart/products/menu')</script>`;
+      window.location.replace('/furni/products/menu')</script>`;
       res.end(html);
     } catch (err) {
       console.log(`ERROR, cont/addNewProduct, ${err.message}`);

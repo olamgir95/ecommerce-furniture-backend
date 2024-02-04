@@ -6,13 +6,13 @@
     <div class="group_name">
       <ul class="nav justify-content-center">
         <li class="nav-item pointer">
-          <a href="/maltimart" class="nav-link active">Home</a>
+          <a href="/furni" class="nav-link active">Home</a>
         </li>
         <li class="nav-item pointer">
-          <a href="/maltimart/products/menu" class="nav-link active">My Products</a>
+          <a href="/furni/products/menu" class="nav-link active">My Products</a>
         </li>
         <li class="nav-item pointer">
-          <a href="/maltimart/logout" class="nav-link active">Logout</a>
+          <a href="/furni/logout" class="nav-link active">Logout</a>
         </li>
       </ul>
     </div>
@@ -55,7 +55,7 @@
           </div>
         </div>
         <form
-          action="/maltimart/events/create"
+          action="/furni/events/create"
           method="POST"
           onsubmit="return validateForm()"
           class="furniture_container"
@@ -166,7 +166,7 @@
       const id = e.target.id;
       const event_status = $(`#${id}.new_event_status`).val();
       try {
-        const response = await axios.post(`/maltimart/events/edit/${id}`, {
+        const response = await axios.post(`/furni/events/edit/${id}`, {
           id: id,
           event_status: event_status,
         });

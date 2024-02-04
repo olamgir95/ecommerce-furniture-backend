@@ -55,7 +55,7 @@ const sellerController = {
       res.render("seller-menu", { seller_data: data });
     } catch (err) {
       console.log(`ERROR, cont/getMySellerProducts, ${err.message}`);
-      res.redirect("/maltimart");
+      res.redirect("/furni");
     }
   },
 
@@ -67,7 +67,7 @@ const sellerController = {
       res.render("my-events", { my_events_data: data });
     } catch (err) {
       console.log(`ERROR, cont/getMySellerEvents, ${err.message}`);
-      res.redirect("/maltimart");
+      res.redirect("/furni");
     }
   },
 
@@ -94,12 +94,12 @@ const sellerController = {
 
       req.session.member = result;
       req.session.save(function () {
-        res.redirect("/maltimart/products/menu");
+        res.redirect("/furni/products/menu");
       });
     } catch (err) {
       console.log(`ERROR, cont/signup, ${err.message}`);
       res.send(
-        ` <script>alert("${err.message}"); window.location.replace('/maltimart/sign-up');</script>
+        ` <script>alert("${err.message}"); window.location.replace('/furni/sign-up');</script>
           `
       );
     }
@@ -125,8 +125,8 @@ const sellerController = {
       req.session.member = result;
       req.session.save(function () {
         result.mb_type === "SELLER"
-          ? res.redirect("/maltimart/products/menu")
-          : res.redirect("/maltimart/all-sellers");
+          ? res.redirect("/furni/products/menu")
+          : res.redirect("/furni/all-sellers");
       });
     } catch (err) {
       console.log(`ERROR, cont/login, ${err.message}`);
@@ -138,7 +138,7 @@ const sellerController = {
     try {
       console.log("GET cont.logout");
       req.session.destroy(function () {
-        res.redirect("/maltimart");
+        res.redirect("/furni");
       });
     } catch (err) {
       console.log(`ERROR, cont/login, ${err.message}`);
@@ -171,7 +171,7 @@ const sellerController = {
       next();
     } else {
       const html = `<script>alert("Admin page: Permission denied!");
-          window.location.replace="/maltimart";
+          window.location.replace="/furni";
           </script>`;
       res.end(html);
     }

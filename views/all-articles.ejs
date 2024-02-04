@@ -6,20 +6,20 @@
     <div class="group_name">
       <ul class="nav justify-content-center">
         <li class="nav-item pointer">
-          <a href="/maltimart" class="nav-link active">Home</a>
+          <a href="/furni" class="nav-link active">Home</a>
         </li>
         <li class="nav-item pointer">
-          <a href="/maltimart/all-sellers" class="nav-link active">Brands</a>
+          <a href="/furni/all-sellers" class="nav-link active">Brands</a>
         </li>
         <li class="nav-item pointer">
-          <a href="/maltimart/logout" class="nav-link active">Logout</a>
+          <a href="/furni/logout" class="nav-link active">Logout</a>
         </li>
       </ul>
     </div>
 
     <div class="seller_menu_frame">
       <div class="seller_container">
-        <div class="maltimart_table">
+        <div class="furni_table">
          
           <table class="table table-responsive-md table-hover">
             <caption class="new_furniture_txt"> Articles </caption>
@@ -60,7 +60,7 @@
         const art_status = $(`#${id}.art_status`).val();
         
         axios
-        .post("/maltimart/all-articles/edit", { id: id, art_status: art_status })
+        .post("/furni/all-articles/edit", { id: id, art_status: art_status })
         .then((response) => {
           const result = response.data;
           if(result.state==='success') alert("successfully updated");

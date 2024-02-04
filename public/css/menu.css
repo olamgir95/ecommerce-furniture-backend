@@ -33,7 +33,7 @@ body {
   align-items: center;
 }
 
-.seller_container .maltimart_table {
+.seller_container .furni_table {
   position: relative;
   width: 85%;
   height: auto;
@@ -44,11 +44,11 @@ body {
   align-items: center;
 }
 
-.maltimart_table table thead th {
+.furni_table table thead th {
   text-align: left;
 }
 
-.maltimart_table .table-sm thead tr {
+.furni_table .table-sm thead tr {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
