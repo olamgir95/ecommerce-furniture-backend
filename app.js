@@ -51,7 +51,7 @@ app.set("view engine", "ejs");
 
 // 4. Routing setup
 app.use("/", router);
-app.use("/maltimart", router_admin);
+app.use("/furni", router_admin);
 
 const server = http.createServer(app);
 
