@@ -16,15 +16,16 @@ class Member {
   async signupData(input) {
     try {
       const salt = await bcrypt.genSalt();
-      console.log("res", input);
       input.mb_password = await bcrypt.hash(input.mb_password, salt);
       const new_member = new memberModel(input);
       let result;
       try {
+        const isMember = await this._isExistedName(new_member.mb_nick);
+        assert.ok(!isMember, "Your nick name already exist!");
         result = await new_member.save();
       } catch (mongo_err) {
         console.log(mongo_err);
-        throw new Error("Mongo validation error occurred.");
+        throw mongo_err;
       }
       result.mb_password = "";
 
@@ -32,6 +33,12 @@ class Member {
     } catch (err) {
       throw err;
     }
+  }
+
+  async _isExistedName(nickName) {
+    const queryResult = await memberModel.findOne({ mb_nick: nickName });
+    if (!queryResult) return false;
+    else return true;
   }
 
   async loginData(input) {
