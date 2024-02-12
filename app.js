@@ -64,17 +64,17 @@ const io = require("socket.io")(server, {
 let online_users = 0;
 io.on("connection", function (socket) {
   online_users++;
-  console.log(`New user :`, online_users);
+  console.log("New user :", online_users);
   socket.emit("greetMsg", { text: "Welcome" });
   io.emit("infoUsers", { total: online_users });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", function () {
     online_users--;
     socket.broadcast.emit("infoUsers", { total: online_users });
     console.log("client disconnected, total:", online_users);
   });
 
-  socket.on("createMsg", (data) => {
+  socket.on("createMsg", function (data) {
     io.emit("newMsg", data);
   });
 });
