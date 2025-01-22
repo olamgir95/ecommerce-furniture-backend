@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.ts",
-    "start:prod": "node server.js && NODE_ENV=production"
+    "dev": "nodemon api/server.js",
+    "start": "node api/server.js"
   },
   "keywords": [],
   "author": "Olamgir Jonny",
