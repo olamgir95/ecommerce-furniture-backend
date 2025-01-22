@@ -46,7 +46,8 @@ app.use((req, res, next) => {
 });
 
 // 3. View engine setup
-app.set("views", "views");
+app.set("views", path.join(__dirname, "../views")); // Adjust path as needed
+
 app.set("view engine", "ejs");
 
 // 4. Routing setup
@@ -55,12 +56,8 @@ app.use("/", (req, res, next) => {
   console.log(`Request URL: ${req.url}`);
   next();
 });
-// app.use("/furni", router_admin);
-app.use("/", router_admin);
-app.use((err, req, res, next) => {
-  console.error(`Error at ${req.url}:`, err.message);
-  res.status(500).send("Internal Server Error");
-});
+app.use("/furni", router_admin);
+app.use("/", router);
 const server = http.createServer(app);
 
 //SOCKET.IO BACKEND SERVER //
@@ -87,4 +84,8 @@ io.on("connection", function (socket) {
   });
 });
 
+app.use((err, req, res, next) => {
+  console.error(`Error at ${req.url}:`, err.message);
+  res.status(500).send("Internal Server Error");
+});
 module.exports = server;
