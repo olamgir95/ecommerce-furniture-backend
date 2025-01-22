@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/furni(.*)",
+      "src": "/(.*)",
       "dest": "/server.js"
     }
   ]
