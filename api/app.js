@@ -50,9 +50,17 @@ app.set("views", "views");
 app.set("view engine", "ejs");
 
 // 4. Routing setup
+
+app.use("/", (req, res, next) => {
+  console.log(`Request URL: ${req.url}`);
+  next();
+});
 app.use("/furni", router_admin);
 app.use("/", router);
-
+app.use((err, req, res, next) => {
+  console.error(`Error at ${req.url}:`, err.message);
+  res.status(500).send("Internal Server Error");
+});
 const server = http.createServer(app);
 
 //SOCKET.IO BACKEND SERVER //
