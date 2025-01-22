@@ -15,8 +15,8 @@ const store = new MongoDBStore({
 });
 
 // 1. Initialization code
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use(express.static(path.join(__dirname, "../public")));
+app.use("../uploads", express.static(__dirname + "../uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
