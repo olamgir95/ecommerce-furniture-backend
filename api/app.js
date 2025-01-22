@@ -53,8 +53,10 @@ app.set("view engine", "ejs");
 app.use("/furni", router_admin);
 app.use("/", router);
 
+const server = http.createServer(app);
+
 //SOCKET.IO BACKEND SERVER //
-const io = require("socket.io")(http.createServer(app), {
+const io = require("socket.io")(server, {
   serveClient: false,
   origin: "*:*",
   transport: ["websocket", "xhr-polling"],
@@ -77,4 +79,4 @@ io.on("connection", function (socket) {
   });
 });
 
-module.exports = app;
+module.exports = server;
