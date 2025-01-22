@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const memberController = require("./controllers/memberController");
-const productController = require("./controllers/productController");
-const sellerController = require("./controllers/sellerController");
-const orderController = require("./controllers/orderController");
-const communityController = require("./controllers/CommunityController");
-const followController = require("./controllers/followController");
-const eventController = require("./controllers/eventController");
-const commentController = require("./controllers/commentController");
-const uploader_community = require("./utils/upload-multer")("community");
-const uploader_member = require("./utils/upload-multer")("members");
+const memberController = require("../controllers/memberController");
+const productController = require("../controllers/productController");
+const sellerController = require("../controllers/sellerController");
+const orderController = require("../controllers/orderController");
+const communityController = require("../controllers/CommunityController");
+const followController = require("../controllers/followController");
+const eventController = require("../controllers/eventController");
+const commentController = require("../controllers/commentController");
+const uploader_community = require("../utils/upload-multer")("community");
+const uploader_member = require("../utils/upload-multer")("members");
 
 /*************************/
 /*  REST API  */

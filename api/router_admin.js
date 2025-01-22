@@ -1,9 +1,9 @@
 const express = require("express");
-const productController = require("./controllers/productController");
-const sellerController = require("./controllers/sellerController");
-const upload = require("./utils/upload-multer");
-const communityController = require("./controllers/CommunityController");
-const eventController = require("./controllers/eventController");
+const productController = require("../controllers/productController");
+const sellerController = require("../controllers/sellerController");
+const upload = require("../utils/upload-multer");
+const communityController = require("../controllers/CommunityController");
+const eventController = require("../controllers/eventController");
 
 /*************************/
 /*  BSSR EJS */

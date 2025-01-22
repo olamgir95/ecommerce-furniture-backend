@@ -50,8 +50,8 @@ app.set("views", "views");
 app.set("view engine", "ejs");
 
 // 4. Routing setup
-app.use("/", router);
 app.use("/furni", router_admin);
+app.use("/", router);
 
 const server = http.createServer(app);
 
