@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const router_admin = require("./router_admin.js");
+const router_admin = require("./api/router_admin.js");
 const cookieParser = require("cookie-parser");
 let session = require("express-session");
-const router = require("./router.js");
+const router = require("./api/router.js");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const cors = require("cors");
 const path = require("path");
@@ -15,8 +15,8 @@ const store = new MongoDBStore({
 });
 
 // 1. Initialization code
-app.use(express.static(path.join(__dirname, "../public")));
-app.use("/uploads", express.static(__dirname + "../uploads"));
+app.use(express.static(path.join(__dirname, "/public")));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 // 3. View engine setup
-app.set("views", path.join(__dirname, "../views")); // Adjust path as needed
+app.set("views", path.join(__dirname, "/views")); // Adjust path as needed
 
 app.set("view engine", "ejs");
 

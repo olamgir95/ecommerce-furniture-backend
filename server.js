@@ -18,7 +18,7 @@ mongoose.connect(
       console.log("Mongoose connection successful");
       // console.log(goose);
 
-      const server = require("./api/app");
+      const server = require("./app");
       const port = process.env.PORT || 3002;
       server.listen(port, () => {
         console.log(
