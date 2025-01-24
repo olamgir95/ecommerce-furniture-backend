@@ -144,7 +144,7 @@ html {
 .sign_up_frame label {
   font-family: "Poppins";
   font-style: normal;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 18px;
 }
@@ -158,6 +158,9 @@ html {
   background-color: #f6f5f5;
   border: 1px solid #dddddd;
   border-radius: 8px;
+}
+.sign-up_con {
+  height: fit-content !important;
 }
 
 .media_frame {
@@ -188,7 +191,7 @@ html {
 }
 .media_text {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 18px;
   color: #140342;
   font-style: normal;
@@ -238,6 +241,7 @@ html {
 }
 
 .thumbnail_desc {
+  font-size: 14px;
   margin-top: 25px;
   font-style: normal;
   font-weight: 400;

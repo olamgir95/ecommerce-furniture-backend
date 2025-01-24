@@ -1,9 +1,15 @@
 {
-  "redirects": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/",
-      "destination": "/furni",
-      "permanent": true
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ]
 }
