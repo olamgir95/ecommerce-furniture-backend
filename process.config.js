@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "Shopsy",
+      name: "Furnishop-backend",
       cwd: "./",
       script: "./server.js",
       watch: true,

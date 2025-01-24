@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   node:
-    container_name: shopsy_backend
+    container_name: furnishop_backend
     restart: always
     image: node:16.10.0
     ports:
