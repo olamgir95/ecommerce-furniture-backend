@@ -16,7 +16,7 @@ const store = new MongoDBStore({
 
 // 1. Initialization code
 app.use(express.static(path.join(__dirname, "../public")));
-app.use("../uploads", express.static(__dirname + "../uploads"));
+app.use("/uploads", express.static(__dirname + "../uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -52,10 +52,6 @@ app.set("view engine", "ejs");
 
 // 4. Routing setup
 
-app.use("/", (req, res, next) => {
-  console.log(`Request URL: ${req.url}`);
-  next();
-});
 app.use("/furni", router_admin);
 app.use("/", router);
 const server = http.createServer(app);
